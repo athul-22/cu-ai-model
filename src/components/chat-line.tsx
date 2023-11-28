@@ -16,9 +16,15 @@ import {
 } from "@/components/ui/accordion";
 import ReactMarkdown from "react-markdown";
 import { sanitizeAndFormatText } from "@/lib/utils";
-import ReactLinkify from 'react-linkify';
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, Key } from "react";
-
+import ReactLinkify from "react-linkify";
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+  PromiseLikeOfReactNode,
+  Key,
+} from "react";
 
 // util helper to convert new lines to <br /> tags
 const convertNewLines = (text: string) =>
@@ -30,8 +36,11 @@ const convertNewLines = (text: string) =>
   ));
 
 // Function to convert plain text with URLs into clickable links
-const parseTextWithLinks = (text: string | React.ReactNode, isDarkTheme: boolean) => {
-  if (typeof text === 'string') {
+const parseTextWithLinks = (
+  text: string | React.ReactNode,
+  isDarkTheme: boolean
+) => {
+  if (typeof text === "string") {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = text.split(urlRegex);
 
@@ -43,7 +52,11 @@ const parseTextWithLinks = (text: string | React.ReactNode, isDarkTheme: boolean
             href={part}
             target="_blank"
             rel="noopener noreferrer"
-            className={isDarkTheme ? "text-blue-400 underline" : "text-blue-500 underline"}
+            className={
+              isDarkTheme
+                ? "text-blue-400 underline"
+                : "text-blue-500 underline"
+            }
           >
             {part}
           </a>
@@ -56,8 +69,6 @@ const parseTextWithLinks = (text: string | React.ReactNode, isDarkTheme: boolean
   // If the input is already a ReactNode, return it as is
   return text;
 };
-
-
 
 export function ChatLine({
   role = "assistant",
@@ -73,33 +84,34 @@ export function ChatLine({
 
   // Define styles for light and dark themes
   const lightLinkStyle = {
-    color: '#006da3', // Light green color
-    backgroundColor:'#abe3ff',
-    padding:'5px',
-    borderRadius:'5px',
-    
+    color: "#006da3", // Light green color
+    backgroundColor: "#abe3ff",
+    padding: "5px",
+    borderRadius: "5px",
   };
 
   const darkLinkStyle = {
-    color: '#003e64', // Dark green color
-    backgroundColor:'#abe3ff',
-    padding:'5px',
-    borderRadius:'5px',
+    color: "#003e64", // Dark green color
+    backgroundColor: "#abe3ff",
+    padding: "5px",
+    borderRadius: "5px",
   };
 
- // Custom component decorator for links
-const linkDecorator = (href: string, text: string, key: number) => (
-  <a
-    key={key}
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    style={isDarkTheme ? darkLinkStyle : lightLinkStyle}
-  >
-    {text}
-  </a>
-);
-
+  const linkDecorator = (
+    href: string | undefined,
+    text: string,
+    key: React.Key
+  ) => (
+    <a
+      key={key}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={isDarkTheme ? darkLinkStyle : lightLinkStyle}
+    >
+      {text}
+    </a>
+  );
 
   return (
     <div>
