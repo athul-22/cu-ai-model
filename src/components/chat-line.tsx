@@ -17,6 +17,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import { sanitizeAndFormatText } from "@/lib/utils";
 import ReactLinkify from 'react-linkify';
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, Key } from "react";
 
 
 // util helper to convert new lines to <br /> tags
@@ -87,7 +88,7 @@ export function ChatLine({
   };
 
   // Custom component decorator for links
-  const linkDecorator = (href, text, key) => (
+  const linkDecorator = (href: string | undefined, text: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined, key: Key | null | undefined) => (
     <a
       key={key}
       href={href}
