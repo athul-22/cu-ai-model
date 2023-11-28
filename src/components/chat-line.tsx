@@ -87,18 +87,19 @@ export function ChatLine({
     borderRadius:'5px',
   };
 
-  // Custom component decorator for links
-  const linkDecorator = (href: string | undefined, text: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined, key: Key | null | undefined) => (
-    <a
-      key={key}
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      style={isDarkTheme ? darkLinkStyle : lightLinkStyle}
-    >
-      {text}
-    </a>
-  );
+ // Custom component decorator for links
+const linkDecorator = (href: string, text: string, key: number) => (
+  <a
+    key={key}
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={isDarkTheme ? darkLinkStyle : lightLinkStyle}
+  >
+    {text}
+  </a>
+);
+
 
   return (
     <div>
