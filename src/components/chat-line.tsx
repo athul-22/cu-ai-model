@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/accordion";
 import ReactMarkdown from "react-markdown";
 import { sanitizeAndFormatText } from "@/lib/utils";
+import ReactLinkify from 'react-linkify';
+
 
 // util helper to convert new lines to <br /> tags
 const convertNewLines = (text: string) =>
@@ -26,15 +28,76 @@ const convertNewLines = (text: string) =>
     </span>
   ));
 
+// Function to convert plain text with URLs into clickable links
+const parseTextWithLinks = (text: string | React.ReactNode, isDarkTheme: boolean) => {
+  if (typeof text === 'string') {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+
+    return parts.map((part, index) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={isDarkTheme ? "text-blue-400 underline" : "text-blue-500 underline"}
+          >
+            {part}
+          </a>
+        );
+      }
+      return convertNewLines(part);
+    });
+  }
+
+  // If the input is already a ReactNode, return it as is
+  return text;
+};
+
+
+
 export function ChatLine({
   role = "assistant",
   content,
   sources,
-}: ChatGPTMessage) {
+  isDarkTheme = false,
+}: ChatGPTMessage & { isDarkTheme?: boolean }) {
   if (!content) {
     return null;
   }
+
   const formattedMessage = convertNewLines(content);
+
+  // Define styles for light and dark themes
+  const lightLinkStyle = {
+    color: '#006da3', // Light green color
+    backgroundColor:'#abe3ff',
+    padding:'5px',
+    borderRadius:'5px',
+    
+  };
+
+  const darkLinkStyle = {
+    color: '#003e64', // Dark green color
+    backgroundColor:'#abe3ff',
+    padding:'5px',
+    borderRadius:'5px',
+  };
+
+  // Custom component decorator for links
+  const linkDecorator = (href, text, key) => (
+    <a
+      key={key}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={isDarkTheme ? darkLinkStyle : lightLinkStyle}
+    >
+      {text}
+    </a>
+  );
 
   return (
     <div>
@@ -42,16 +105,20 @@ export function ChatLine({
         <CardHeader>
           <CardTitle
             className={
-              role != "assistant"
+              role !== "assistant"
                 ? "text-amber-500 dark:text-amber-200"
-                : "text-blue-500 dark:text-blue-200"
+                : isDarkTheme
+                ? "text-blue-400"
+                : "text-blue-500"
             }
           >
-            {role == "assistant" ? "AI" : "You"}
+            {role === "assistant" ? "AI" : "You"}
           </CardTitle>
         </CardHeader>
         <CardContent className="text-sm">
-          <Balancer>{formattedMessage}</Balancer>
+          <ReactLinkify componentDecorator={linkDecorator}>
+            {formattedMessage}
+          </ReactLinkify>
         </CardContent>
         <CardFooter>
           <CardDescription className="w-full">
