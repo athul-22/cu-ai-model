@@ -80,6 +80,13 @@ export function ChatLine({
     return null;
   }
 
+  // Check if content includes "tokens-ended"
+  const isTokenEnded = content.includes("tokens-ended");
+
+  // Display only the part of content before "tokens-ended"
+  const displayContent = isTokenEnded ? content.split("tokens-ended")[0] : content;
+
+
   const formattedMessage = convertNewLines(content);
 
   // Define styles for light and dark themes
@@ -131,7 +138,7 @@ export function ChatLine({
         </CardHeader>
         <CardContent className="text-sm">
           <ReactLinkify componentDecorator={linkDecorator}>
-            {formattedMessage}
+            {displayContent}
           </ReactLinkify>
         </CardContent>
         <CardFooter>

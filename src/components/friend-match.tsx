@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Users } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { ChangeEvent } from "react";
+
 
 import {
   Sheet,
@@ -27,12 +29,12 @@ export function FriendConnector() {
     additionalInfo: "",
   });
 
-  const handleInputChange = () => {
-    // const { name, value } = e.target;
-    // setFormData((prevData) => ({
-    //   ...prevData,
-    //   [name]: value,
-    // }));
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleUpload = () => {
@@ -72,7 +74,8 @@ export function FriendConnector() {
               id="name"
               name="name"
               value={formData.name}
-              onChange={handleInputChange}
+             
+              onChange={(e) => handleInputChange(e)}
             />
           </div>
 
@@ -83,7 +86,7 @@ export function FriendConnector() {
               id="email"
               name="email"
               value={formData.email}
-              onChange={handleInputChange}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleInputChange(e)}
             />
           </div>
 
@@ -129,7 +132,7 @@ export function FriendConnector() {
         <div className="block items-center space-x-4 p-4">
           <div className="flex-shrink-0">
             {/* Notion-style image */}
-            <div className="w-65 h-65 flex justify-center items-center rounded-md overflow-hidden">
+            <div className="w-50 h-50 flex justify-center items-center rounded-md overflow-hidden">
               <img
                 className="object-cover w-60 h-60"
                 src="https://notioly.com/wp-content/uploads/2022/07/152.Study-Group.png"
@@ -139,7 +142,7 @@ export function FriendConnector() {
             </div>
           </div>
         </div>
-        <label className="text-red-500 absolute bottom-10 left-0 right-0 text-center">
+        <label className="text-red-500 absolute bottom-5 left-0 right-0 text-center">
           Information subject to verification.
         </label>
 
