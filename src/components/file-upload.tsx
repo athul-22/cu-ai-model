@@ -43,7 +43,7 @@ export function FileUpload() {
         <SheetHeader>
           <SheetTitle>Upload Your Data</SheetTitle>
           <SheetDescription>
-            Make our AI Model more intelligent 😉
+            Make our AI Model more intelligent
           </SheetDescription>
         </SheetHeader>
 

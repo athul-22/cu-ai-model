@@ -91,16 +91,16 @@ export function ChatLine({
 
   // Define styles for light and dark themes
   const lightLinkStyle = {
-    color: "#006da3", // Light green color
-    backgroundColor: "#abe3ff",
-    padding: "5px",
+    color: "#032D42", 
+    backgroundColor: "#C6EBFD",
+    padding: "3.5px",
     borderRadius: "5px",
   };
 
   const darkLinkStyle = {
-    color: "#003e64", // Dark green color
-    backgroundColor: "#abe3ff",
-    padding: "5px",
+    color: "#032D42", // Dark green color
+    backgroundColor: "#F0FAFF",
+    padding: "3.5px",
     borderRadius: "5px",
   };
 
@@ -133,7 +133,7 @@ export function ChatLine({
                 : "text-blue-500"
             }
           >
-            {role === "assistant" ? "AI" : "You"}
+            {role === "assistant" ? "SAGA" : "You"}
           </CardTitle>
         </CardHeader>
         <CardContent className="text-sm">
