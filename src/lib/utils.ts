@@ -48,6 +48,6 @@ export const initialMessage: ChatGPTMessage[] = [
   {
     role: "assistant",
     content:
-      "Hi there! Welcome to the AI assistant.Ask me your questions !",
+      "Hi there!👋 Welcome to the Cluster ai.Ask me your questions!",
   },
 ];

@@ -133,7 +133,7 @@ export function ChatLine({
                 : "text-blue-500"
             }
           >
-            {role === "assistant" ? "SAGA" : "You"}
+            {role === "assistant" ? "Cluster.ai" : "You"}
           </CardTitle>
         </CardHeader>
         <CardContent className="text-sm">
